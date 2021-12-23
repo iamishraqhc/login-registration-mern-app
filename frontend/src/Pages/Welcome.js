@@ -17,6 +17,9 @@ const Welcome = () => {
 			} else {
 				setUser(authUser)
 			}
+		} else {
+			alert('Please Login')
+			history.replace('/login')
 		}
 	}, [])
 
