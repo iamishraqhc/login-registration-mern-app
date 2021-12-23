@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
+// import axios from 'axios'
 
 const Register = () => {
     const history = useHistory()
@@ -11,20 +11,27 @@ const Register = () => {
 
     const registerUser = async (event) => {
         event.preventDefault()
+        // const body = {
+        //     name: name,
+        //     email: email,
+        //     password: password
+        // }
+        // const response = await axios.post('https://localhost:5000/register', body)
+        // const data = await response.data
 
-        const response = await axios.get('https://localhost:5000/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name,
-                email,
-                password
-            })
-        })
+        const response = await fetch('http://localhost:5000/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				name,
+				email,
+				password,
+			}),
+		})
 
-        const data = await response.data
+		const data = await response.json()
 
         if (data.status === 'OK') {
             history.push('/login')

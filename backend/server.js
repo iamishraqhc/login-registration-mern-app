@@ -11,6 +11,7 @@ const app = express()
 const PORT = process.env.PORT || 5000
 
 app.use(cors())
+app.use(express.json())
 
 mongoose.connect('mongodb://localhost:27017/login-register-mern')
 
@@ -39,13 +40,14 @@ app.post('/register', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
+    console.log(req.body)
     const user = await User.findOne({ 
         email: req.body.email
     })
 
     if (!user) return { status: 'error', error: 'Invalid Login' }
     const isPasswordValid = await bcrypt.compare(
-        req.body.password, req.body.password, 
+        req.body.password, 
         user.password
     )
 

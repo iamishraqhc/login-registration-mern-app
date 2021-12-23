@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import "../App.css"
 
 const Login = () => {
@@ -9,18 +9,26 @@ const Login = () => {
     const loginUser = async (event) => {
         event.preventDefault()
 
-        const response = await axios.get('http://localhost:5000/login', {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        })
+        // const body = {
+        //     email: email,
+        //     password: password
+        // }
 
-        const data = await response.data
+        // const response = await axios.post('http://localhost:5000/login', body)
+        // const data = await response.data
+
+        const response = await fetch('http://localhost:5000/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email,
+				password,
+			}),
+		})
+
+		const data = await response.json()
 
         if (data.user) {
             localStorage.setItem('token', data.user)
