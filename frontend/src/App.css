@@ -3,15 +3,15 @@
   justify-content: center;
 }
 
-.Login form {
+form {
   border: 3px solid #f1f1f1;
 }
 
-.Login h1 {
+h1 {
   text-align: center;
 }
 
-.Login input[type=email], .Login input[type=password] {
+input[type=text], input[type=email], input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -21,7 +21,7 @@
 }
 
 /* Set a style for all buttons */
-.Login input[type=submit] {
+input[type=submit] {
   background-color: #04AA6D;
   color: white;
   padding: 14px 20px;
@@ -32,6 +32,6 @@
 }
 
 /* Add a hover effect for buttons */
-.Login input[type=submit]:hover {
+input[type=submit]:hover {
   opacity: 0.8;
 }
