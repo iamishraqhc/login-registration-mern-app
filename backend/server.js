@@ -20,7 +20,6 @@ app.get('/', (req, res) => {
 })
 
 app.post('/register', async (req, res) => {
-    console.log(req.body)
     try {
         const newPassword = await bcrypt.hash(req.body.password, 10)
         await User.create({
@@ -40,7 +39,6 @@ app.post('/register', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
-    console.log(req.body)
     const user = await User.findOne({ 
         email: req.body.email
     })
