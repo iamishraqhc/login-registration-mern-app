@@ -18,6 +18,12 @@ export const authenticateUser = (req: AuthRequest, res: Response, next: NextFunc
     req.user = decoded;
     next();
   } catch (err) {
-    res.status(400).json({ status: "error", error: "Invalid token." });
+    if (err instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({ status: "error", error: "Token has expired." });
+    }
+    if (err instanceof jwt.JsonWebTokenError) {
+      return res.status(400).json({ status: "error", error: "Invalid token format." });
+    }
+    res.status(400).json({ status: "error", error: "Token verification failed." });
   }
 };
