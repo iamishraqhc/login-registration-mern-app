@@ -22,7 +22,7 @@ export default function Welcome() {
       alert("Please Login");
       router.replace("/login");
     }
-  }, []);
+  }, [router]);
 
   const logoutUser = () => {
     alert("Logged Out");
