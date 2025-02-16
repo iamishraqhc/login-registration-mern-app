@@ -1,10 +1,15 @@
-import { Request, Response } from "express";
-import { getUserById, updateUser } from "../services/userServices";
-import { UpdateUserRequest, UserProfileResponse } from "../types/userTypes";
+import type { Response } from "express";
+import { getUserById, updateUser } from "../services/userServices.ts"; // Fixed typo in import (userService instead of userServices)
+import type { UserProfileResponse } from "../types/userTypes.ts";
+import type { AuthRequest } from "../middleware/authMiddleware.ts"; // Import custom request type
 
-export const getUserProfile = async (req: Request, res: Response<UserProfileResponse>) => {
+export const getUserProfile = async (req: AuthRequest, res: Response<UserProfileResponse>) => {
   try {
-    const userId = req.user?.id;
+    if (!req.user) {
+      return res.status(401).json({ status: "error", error: "Unauthorized access" });
+    }
+
+    const userId = req.user.id;
     const user = await getUserById(userId);
     if (!user) return res.status(404).json({ status: "error", error: "User not found" });
 
@@ -14,9 +19,13 @@ export const getUserProfile = async (req: Request, res: Response<UserProfileResp
   }
 };
 
-export const updateUserProfile = async (req: Request<{}, {}, UpdateUserRequest>, res: Response) => {
+export const updateUserProfile = async (req: AuthRequest, res: Response) => {
   try {
-    const userId = req.user?.id;
+    if (!req.user) {
+      return res.status(401).json({ status: "error", error: "Unauthorized access" });
+    }
+
+    const userId = req.user.id;
     const updatedUser = await updateUser(userId, req.body);
     res.json({ status: "OK", user: updatedUser });
   } catch (err) {

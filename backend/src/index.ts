@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import config from "./config";
-import indexRoutes from "./routes/indexRoutes";
-import { setupSwagger } from "./swagger";
+import config from "./config.ts";
+import indexRoutes from "./routes/indexRoutes.ts";
+import { setupSwagger } from "./swagger.ts";
 
 const app = express();
 app.use(cors());

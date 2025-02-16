@@ -1,7 +1,7 @@
 import express from "express";
-import { getUserProfile, updateUserProfile } from "../../controllers/userControllers";
-import { authenticateUser } from "../../middleware/authMiddleware";
-import { validateUserExists } from "../../middleware/userMiddleware";
+import { getUserProfile, updateUserProfile } from "../../controllers/userControllers.ts";
+import { authenticateUser } from "../../middleware/authMiddleware.ts";
+import { validateUserExists } from "../../middleware/userMiddleware.ts";
 
 const router = express.Router();
 

@@ -26,7 +26,7 @@ export default function Login() {
         alert("Wrong credentials");
       }
     } catch (error) {
-      alert("Connection error. Please try again later.");
+      console.error("Connection error. Please try again later.", error);
       return;
     }
   };

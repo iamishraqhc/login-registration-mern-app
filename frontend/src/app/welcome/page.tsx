@@ -19,13 +19,13 @@ export default function Welcome() {
         setUser(authUser);
       }
     } else {
-      alert("Please Login");
+      console.log("Please Login");
       router.replace("/login");
     }
   }, [router]);
 
   const logoutUser = () => {
-    alert("Logged Out");
+    console.log("Logged Out");
     localStorage.removeItem("token");
     router.replace("/login");
   };

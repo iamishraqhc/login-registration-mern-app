@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import { getUserById } from "../services/userServices";
-import { AuthRequest } from "./authMiddleware";
+import type { Response, NextFunction } from "express";
+import { getUserById } from "../services/userServices.ts";
+import type { AuthRequest } from "./authMiddleware.ts";
 
 export const validateUserExists = async (req: AuthRequest, res: Response, next: NextFunction) => {
   if (!req.user) {

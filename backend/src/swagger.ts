@@ -1,6 +1,6 @@
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import { Express } from "express";
+import type { Express } from "express";
 
 const swaggerOptions: swaggerJsdoc.Options = {
   definition: {
