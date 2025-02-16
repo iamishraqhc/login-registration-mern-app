@@ -1,22 +1,24 @@
-import { Request, Response } from "express";
-import { registerUser, loginUser } from "../services/authServices";
+import type { Request, Response } from "express";
+import { registerUser, loginUser } from "../services/authServices.ts";
+import { RegisterSchema, LoginSchema } from "../schemas/authSchema.ts";
+import type { RegisterRequest, LoginRequest, LoginResponse } from "../types/authTypes.ts";
 
-export const register = async (req: Request, res: Response) => {
+export const register = async (req: Request<{}, {}, RegisterRequest>, res: Response) => {
   try {
-    const { name, email, password } = req.body;
-    const response = await registerUser(name, email, password);
+    const parsedBody = RegisterSchema.parse(req.body);
+    const response = await registerUser(parsedBody.name, parsedBody.email, parsedBody.password);
     res.json(response);
   } catch (err) {
-    res.status(500).json({ status: "error", error: (err as Error).message });
+    res.status(400).json({ status: "error", error: (err as Error).message });
   }
 };
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request<{}, {}, LoginRequest>, res: Response<LoginResponse>) => {
   try {
-    const { email, password } = req.body;
-    const response = await loginUser(email, password);
+    const parsedBody = LoginSchema.parse(req.body);
+    const response: LoginResponse = await loginUser(parsedBody.email, parsedBody.password);
     res.json(response);
   } catch (err) {
-    res.status(500).json({ status: "error", error: (err as Error).message });
+    res.status(400).json({ status: "error", error: (err as Error).message });
   }
 };
