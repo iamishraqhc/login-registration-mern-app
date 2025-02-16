@@ -12,6 +12,10 @@ export default function Register() {
 
   const registerUser = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long");
+      return;
+    }
     const response = await fetch(`${config.apiUrl}/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
