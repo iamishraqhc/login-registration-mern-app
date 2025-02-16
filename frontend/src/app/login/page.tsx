@@ -11,11 +11,16 @@ export default function Login() {
 
   const loginUser = async (event: React.FormEvent) => {
     event.preventDefault();
-    const response = await fetch(`${config.apiUrl}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await fetch(`${config.apiUrl}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+    } catch (error) {
+      alert("Connection error. Please try again later.");
+      return;
+    }
 
     const data = await response.json();
     if (data.user) {
