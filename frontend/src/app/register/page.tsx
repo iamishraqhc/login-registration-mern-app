@@ -25,6 +25,9 @@ export default function Register() {
     const data = await response.json();
     if (data.status === "OK") {
       router.push("/login");
+    } else {
+      // Show error message to user
+      alert(data.error || "Registration failed. Please try again.");
     }
   };
 
